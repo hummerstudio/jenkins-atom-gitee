@@ -29,5 +29,5 @@ jobs:
         run: python3 tools/mutations.py
       - uses: actions/upload-artifact@v4
         with:
-          name: logstash-atom
-          path: dist/logstash/
+          name: gitee-atom
+          path: dist/gitee/
