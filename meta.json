@@ -1,0 +1,11 @@
+{
+  "name": "Gitee pull request",
+  "summary": "get / create / comment / merge on a Gitee pull request through API v5, with a read-back after every write.",
+  "author": "hummerstudio",
+  "license": "MIT",
+  "tags": [
+    "official-port",
+    "gitee"
+  ],
+  "homepage": "https://github.com/hummerstudio/jenkins-atom-gitee"
+}

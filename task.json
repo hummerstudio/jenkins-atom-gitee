@@ -1,0 +1,148 @@
+{
+  "atomCode": "gitee",
+  "name": "Gitee 拉取请求",
+  "version": "1.0.0",
+  "description": "Gitee API v5 的拉取请求操作：按 base/head 查、创建、评论、合并，路径与表单字段照 gitee 插件的 GiteeV5ApiProxy；每个写操作都回读，不信状态码。",
+  "execution": {
+    "packagePath": "gitee.jar",
+    "language": "java",
+    "target": "$atom_java_path -cp gitee.jar com.jenkinschina.atom.sdk.AtomRunner"
+  },
+  "input": {
+    "action": {
+      "label": "动作：get（查）/ create（建）/ comment（评论）/ merge（合并）",
+      "type": "vuex-input",
+      "default": "get"
+    },
+    "apiUrl": {
+      "label": "Gitee API 根（默认 https://gitee.com/api/v5；私有部署改成自己的域名 + /api/v5）",
+      "type": "vuex-input",
+      "default": "https://gitee.com/api/v5"
+    },
+    "owner": {
+      "label": "仓库所有者（owner）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "repo": {
+      "label": "仓库名（repo）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "prNumber": {
+      "label": "拉取请求编号（comment / merge 用）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "base": {
+      "label": "目标分支 base（get / create 用）",
+      "type": "vuex-input",
+      "default": "master"
+    },
+    "head": {
+      "label": "源分支 head（get / create 用，可写 user:branch）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "title": {
+      "label": "标题（create 用；可写 ${VAR} 引用构建参数）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "body": {
+      "label": "正文 / 评论内容（可写 ${VAR}）",
+      "type": "vuex-input",
+      "default": ""
+    },
+    "pruneSourceBranch": {
+      "label": "合并后删除源分支 prune_source_branch（默认 false）",
+      "type": "vuex-input",
+      "default": "false"
+    },
+    "draft": {
+      "label": "建为草稿 draft（默认 false）",
+      "type": "vuex-input",
+      "default": "false"
+    },
+    "squash": {
+      "label": "压缩提交 squash（默认 false）",
+      "type": "vuex-input",
+      "default": "false"
+    },
+    "token": {
+      "label": "Gitee API v5 私人令牌（PRIVATE-TOKEN，绑成凭据）",
+      "type": "vuex-input",
+      "default": "",
+      "isSensitive": true
+    },
+    "dryRun": {
+      "label": "只打印请求，不发送（默认 false）",
+      "type": "vuex-input",
+      "default": "false"
+    },
+    "failOnError": {
+      "label": "Gitee 拒绝时失败（默认 true；false 则记一行继续）",
+      "type": "vuex-input",
+      "default": "true"
+    }
+  },
+  "output": {
+    "created": {
+      "type": "string",
+      "description": "是否真建了（false = 本来就有，插件同样把这种情况当成功）"
+    },
+    "number": {
+      "type": "string",
+      "description": "拉取请求编号"
+    },
+    "title": {
+      "type": "string",
+      "description": "回读到的标题"
+    },
+    "url": {
+      "type": "string",
+      "description": "回读到的网页地址"
+    },
+    "count": {
+      "type": "string",
+      "description": "get 查到的条数"
+    },
+    "pullRequests": {
+      "type": "string",
+      "description": "get 的原始 JSON 数组"
+    },
+    "commentId": {
+      "type": "string",
+      "description": "回读到的评论 id"
+    },
+    "state": {
+      "type": "string",
+      "description": "merge 后回读到的状态"
+    },
+    "ok": {
+      "type": "string",
+      "description": "failOnError=false 时为 false，表示 Gitee 拒绝了请求"
+    },
+    "status": {
+      "type": "string",
+      "description": "Gitee 返回的 HTTP 状态码（仅失败放行时）"
+    },
+    "dryRun": {
+      "type": "string",
+      "description": "true 表示只打印没发送"
+    },
+    "request": {
+      "type": "string",
+      "description": "dry run 打印出来的请求行"
+    }
+  },
+  "x-jenkins": {
+    "protocol": "jenkins-1",
+    "requires": {
+      "runner": ">=0.4.0"
+    },
+    "secrets": {
+      "token": ""
+    }
+  }
+}
