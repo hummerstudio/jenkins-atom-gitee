@@ -58,8 +58,11 @@ JAX-RS 方法上，报文规则全在那几个注解里，所以能一个原子�
 
 ## 验证
 
-`tools/check.py` 起一个假 Gitee（`ThreadingHTTPServer`，自己维护 PR 与评论状态、记录原始请求行与 body），
-验的不是"退出码 0"，而是自己复算出来的报文：
+```bash
+mvn verify      # src/test/java/atom/GiteeIT.java
+```
+
+测试起一个假 Gitee（自己维护 PR 与评论状态、记录原始请求行与 body），验的不是"退出码 0"，而是自己复算出来的报文：
 
 - 请求行逐字节比对：路径、查询串（base 在前、`/` → `%2F`、空格 → `%20`）、表单编码（空格 `+`、中文与 `+` 百分号化）；
 - 头：`PRIVATE-TOKEN`、`Accept`、非 GET 的 `Content-Type: application/x-www-form-urlencoded`；
