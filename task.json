@@ -143,6 +143,7 @@
     },
     "secrets": {
       "token": ""
-    }
+    },
+    "category": "scm"
   }
 }
